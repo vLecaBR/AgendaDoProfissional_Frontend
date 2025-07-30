@@ -1,42 +1,28 @@
+// src/pages/Home/Home.jsx
 import React from 'react';
-import {
-  Container,
-  Title,
-  SubTitle,
-  Carousel,
-  TattooArtistCard,
-  ArtistImage,
-  ArtistName,
-  ArtistSpecialty,
-  CTAButton,
-} from './Home.styles';
-import { artists } from './artists';
+import { Container, VideoBackground, Overlay, Content, Title, Subtitle, CTAButton, Section, SectionTitle } from './Home.styles';
+import ArtistCarousel from '../../components/ArtistCarousel/ArtistCarousel';
 
 export default function Home() {
   return (
     <Container>
-      <Title>Old Skull Studio</Title>
-      <SubTitle>Arte na pele com personalidade e respeito à tradição</SubTitle>
+      <VideoBackground autoPlay muted loop>
+        <source src="/bg-video.mp4" type="video/mp4" />
+        Seu navegador não suporta vídeos HTML5.
+      </VideoBackground>
 
-      <Carousel>
-        {artists.map((artist, index) => (
-          <TattooArtistCard
-            key={index}
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-          >
-            <ArtistImage src={artist.image} alt={artist.name} />
-            <ArtistName>{artist.name}</ArtistName>
-            <ArtistSpecialty>{artist.specialty}</ArtistSpecialty>
-          </TattooArtistCard>
-        ))}
-      </Carousel>
+      <Overlay />
 
-      <CTAButton onClick={() => window.location.href = '/login'}>
-        Agende sua Tattoo
-      </CTAButton>
+      <Content>
+        <Title>Studio Tattoo</Title>
+        <Subtitle>Tatuagens Old School com alma moderna</Subtitle>
+        <CTAButton href="/agendamentos">Agendar agora</CTAButton>
+      </Content>
+
+      <Section>
+        <SectionTitle>Nossos Artistas</SectionTitle>
+        <ArtistCarousel />
+      </Section>
     </Container>
   );
 }

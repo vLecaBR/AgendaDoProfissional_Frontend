@@ -17,7 +17,7 @@ export const artists = [
   {
     name: 'Danilo Barber',
     image: '/images/artists',
-    specialty: '',
+    specialty: 'Barba',
   },
 ];
 

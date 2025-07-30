@@ -1,3 +1,4 @@
+// src/components/HeroSection/HeroSection.jsx
 import React from 'react';
 import { HeroContainer, Title, Subtitle, CTAButton } from './HeroSection.styles';
 

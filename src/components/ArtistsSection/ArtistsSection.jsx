@@ -1,3 +1,4 @@
+// src/components/ArtistsSection/ArtistsSection.jsx
 import React from 'react';
 import {
   Section,

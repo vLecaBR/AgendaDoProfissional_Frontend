@@ -4,29 +4,32 @@ import { motion } from 'framer-motion';
 
 export const Container = styled.div`
   position: relative;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
   color: white;
   font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const VideoBackground = styled.video`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
   z-index: -2;
 `;
 
 export const Overlay = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 15, 15, 0.7);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.75);
   z-index: -1;
 `;
 
@@ -35,20 +38,33 @@ export const Content = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
   text-align: center;
-  gap: 1.5rem;
+  min-height: 90vh;
+  padding: 0 20px;
+  max-width: 1000px;
+  width: 100%;
 `;
 
-export const Title = styled(motion.h1)`
-  font-size: 3rem;
+export const Title = styled.h1`
+  font-size: 4rem;
   font-weight: 900;
   text-transform: uppercase;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 2.8rem;
+  }
 `;
 
-export const Subtitle = styled(motion.p)`
-  font-size: 1.3rem;
-  max-width: 500px;
+export const Subtitle = styled.p`
+  font-size: 1.4rem;
+  max-width: 700px;
+  margin: 20px 0;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 export const CTAButton = styled.a`
@@ -59,6 +75,7 @@ export const CTAButton = styled.a`
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
+  margin-top: 20px;
 
   &:hover {
     background: #e10035;
@@ -66,12 +83,56 @@ export const CTAButton = styled.a`
 `;
 
 export const Section = styled.section`
-  padding: 60px 40px;
-  background: #0e0e0e;
+  background: rgba(10, 10, 10, 0.85);
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
 
 export const SectionTitle = styled.h2`
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 30px;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+`;
+
+export const ArtistsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 10px;
+`;
+
+export const ArtistCard = styled.div`
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+`;
+
+export const ArtistImage = styled.img`
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+`;
+
+export const ArtistName = styled.h3`
+  margin-top: 15px;
+  font-size: 1.5rem;
+`;
+
+export const ArtistBio = styled.p`
+  font-size: 1rem;
+  color: #bbb;
+  margin-top: 8px;
 `;

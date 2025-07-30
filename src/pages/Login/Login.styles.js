@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,13 +16,18 @@ export const Form = styled.form`
   padding: 40px 30px;
   border-radius: 12px;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
 
   @media (max-width: 480px) {
     padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 600px;
   }
 `;
 

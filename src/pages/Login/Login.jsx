@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Input, Button, Title, ErrorMessage } from './Login.styles';
-import api from '../services/api';
+import api from '../../services/api';
 
 export default function Login() {
   const navigate = useNavigate();

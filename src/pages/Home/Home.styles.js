@@ -7,10 +7,6 @@ export const Container = styled.div`
   overflow-x: hidden;
   color: white;
   font-family: 'Montserrat', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 `;
 
 export const VideoBackground = styled.video`

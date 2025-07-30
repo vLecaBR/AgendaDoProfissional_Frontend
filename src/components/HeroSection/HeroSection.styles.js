@@ -1,12 +1,9 @@
 // src/components/HeroSection/HeroSection.styles.js
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
-export const HeroContainer = styled(motion.section)`
+export const HeroContainer = styled.section`
   height: 100vh;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,10 +13,7 @@ export const HeroContainer = styled(motion.section)`
   text-align: center;
   padding: 0 20px;
   backdrop-filter: blur(4px);
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 16px;
 `;
-
 
 export const Title = styled.h1`
   font-size: 4rem;

@@ -1,6 +1,4 @@
-// src/components/ArtistsSection/ArtistsSection.jsx
 import React from 'react';
-import { motion } from 'framer-motion';
 import {
   Section,
   SectionTitle,
@@ -8,34 +6,36 @@ import {
   ArtistCard,
   ArtistImage,
   ArtistName,
-  ArtistBio
+  Artistspecialty
 } from './ArtistsSection.styles';
+import { motion } from 'framer-motion';
 
 import artists from '../../pages/Home/artists';
 
 export default function ArtistsSection() {
   return (
-    <Section as={motion.section}
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      <SectionTitle>Nossos Artistas</SectionTitle>
+    <Section>
+      <SectionTitle
+        as={motion.h2}
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        Nossos Artistas
+      </SectionTitle>
       <ArtistsGrid>
         {artists.map((artist, index) => (
           <ArtistCard
             as={motion.div}
             key={index}
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            initial={{ opacity: 0, rotateY: -90 }}
+            whileInView={{ opacity: 1, rotateY: 0 }}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
             viewport={{ once: true }}
           >
             <ArtistImage src={artist.img} alt={artist.name} />
             <ArtistName>{artist.name}</ArtistName>
-            <ArtistBio>{artist.bio}</ArtistBio>
+            <Artistspecialty>{artist.specialty}</Artistspecialty>
           </ArtistCard>
         ))}
       </ArtistsGrid>

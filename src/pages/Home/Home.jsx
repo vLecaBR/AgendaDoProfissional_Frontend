@@ -14,8 +14,12 @@ export default function Home() {
 
       <Overlay />
 
-      {/* Animações aqui dentro do componente */}
-      <HeroSection />
+      <HeroSection
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      />
+
       <ArtistsSection />
     </Container>
   );

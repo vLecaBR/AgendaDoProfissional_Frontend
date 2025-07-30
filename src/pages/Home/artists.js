@@ -1,22 +1,22 @@
 export const artists = [
   {
     name: 'Rafael Barber',
-    image: '/images/artists',
+    img: '/images/barber1.png',
     specialty: 'Jovens',
   },
   {
     name: 'Lucas Barber',
-    image: '/images/artists',
+    img: '/images/artists',
     specialty: 'Degradê',
   },
   {
     name: 'Bruno barber',
-    image: '/images/artists',
+    img: '/images/artists',
     specialty: 'Clássicos',
   },
   {
     name: 'Danilo Barber',
-    image: '/images/artists',
+    img: '/images/artists/danilobarber.png',
     specialty: 'Barba',
   },
 ];

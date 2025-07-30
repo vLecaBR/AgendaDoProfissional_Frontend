@@ -1,56 +1,104 @@
 import React, { useState } from 'react';
+import { Container, Form, Title, Input, Button, ErrorMessage, RegisterLink, GoogleButton } from './Login.styles';
 import { useNavigate } from 'react-router-dom';
-import { Container, Form, Input, Button, Title, ErrorMessage } from './Login.styles';
-import api from '../../services/api';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 
 export default function Login() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  async function handleSubmit(e) {
+  // Função que chama o backend para login normal
+  async function handleLogin(e) {
     e.preventDefault();
     setError('');
 
-    if (!email || !password) {
-      setError('Preencha todos os campos.');
-      return;
-    }
-
     try {
-      const response = await api.post('/auth/login', { email, password });
-      const { token } = response.data;
-      localStorage.setItem('token', token);
-      navigate('/'); // redireciona pro home ou dashboard
+      const res = await fetch('http://localhost:4000/api/auth/login', {  // Ajusta a URL da tua API
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.message || 'Erro no login');
+      }
+
+      const data = await res.json();
+      // Salva o token ou user info no localStorage/sessionStorage conforme tua lógica
+      localStorage.setItem('token', data.token);
+
+      // Redireciona pra página principal (exemplo)
+      navigate('/dashboard');
     } catch (err) {
-      setError('Email ou senha inválidos.');
+      setError(err.message);
     }
+  }
+
+  // Função que recebe o token do Google (backend precisa aceitar isso)
+  async function handleGoogleLoginSuccess(credentialResponse) {
+    setError('');
+    try {
+      const res = await fetch('http://localhost:4000/api/auth/google-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: credentialResponse.credential }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.message || 'Erro no login Google');
+      }
+
+      const data = await res.json();
+      localStorage.setItem('token', data.token);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  function handleGoogleLoginError() {
+    setError('Falha no login com Google');
   }
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleLogin}>
         <Title>Login</Title>
+
+        {error && <ErrorMessage>{error}</ErrorMessage>}
 
         <Input
           type="email"
           placeholder="Email"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          autoComplete="username"
+          required
         />
+
         <Input
           type="password"
           placeholder="Senha"
           value={password}
           onChange={e => setPassword(e.target.value)}
-          autoComplete="current-password"
+          required
         />
 
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-
         <Button type="submit">Entrar</Button>
+
+        <GoogleButton>
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={handleGoogleLoginError}
+          />
+        </GoogleButton>
+
+        <RegisterLink onClick={() => navigate('/register')}>
+          Não tem conta? <strong>Crie uma</strong>
+        </RegisterLink>
       </Form>
     </Container>
   );

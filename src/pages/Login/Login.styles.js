@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,19 +14,14 @@ export const Form = styled.form`
   background: #fff;
   padding: 40px 30px;
   border-radius: 12px;
-  width: 100%;
-  max-width: 500px;
+  width: 400px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
 
   @media (max-width: 480px) {
+    width: 100%;
     padding: 30px 20px;
-    max-width: 100%;
-  }
-
-  @media (min-width: 1200px) {
-    max-width: 600px;
   }
 `;
 
@@ -90,4 +84,26 @@ export const ErrorMessage = styled.p`
   margin-bottom: 15px;
   font-size: 0.9rem;
   text-align: center;
+`;
+
+export const RegisterLink = styled.p`
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: #555;
+  text-align: center;
+  cursor: pointer;
+
+  strong {
+    color: #667eea;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const GoogleButton = styled.div`
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
 `;

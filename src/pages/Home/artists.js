@@ -1,23 +1,23 @@
 export const artists = [
   {
-    name: 'Rafa Ink',
+    name: 'Rafael Barber',
     image: '/images/artists',
-    specialty: 'Blackwork',
+    specialty: 'Jovens',
   },
   {
-    name: 'Tati Black',
+    name: 'Lucas Barber',
     image: '/images/artists',
-    specialty: 'Fine Line',
+    specialty: 'Degradê',
   },
   {
-    name: 'Zeca Needles',
+    name: 'Bruno barber',
     image: '/images/artists',
-    specialty: 'Realismo',
+    specialty: 'Clássicos',
   },
   {
-    name: 'Bruxa Tattoo',
+    name: 'Danilo Barber',
     image: '/images/artists',
-    specialty: 'Neo Traditional',
+    specialty: '',
   },
 ];
 

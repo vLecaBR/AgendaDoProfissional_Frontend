@@ -15,7 +15,7 @@ export default function Login() {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:4000/api/auth/login', {  // Ajusta a URL da tua API
+      const res = await fetch('http://localhost:3333/api/auth/login', {  // Ajusta a URL da tua API
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -41,7 +41,7 @@ export default function Login() {
   async function handleGoogleLoginSuccess(credentialResponse) {
     setError('');
     try {
-      const res = await fetch('http://localhost:4000/api/auth/google-login', {
+      const res = await fetch('http://localhost:3333/api/auth/google-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: credentialResponse.credential }),

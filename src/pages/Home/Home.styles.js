@@ -8,10 +8,9 @@ export const Container = styled.div`
   overflow-x: hidden;
   color: white;
   font-family: 'Montserrat', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
+
+
 
 export const VideoBackground = styled.video`
   position: fixed;
@@ -34,16 +33,11 @@ export const Overlay = styled.div`
 `;
 
 export const Content = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 90vh;
   padding: 0 20px;
   max-width: 1000px;
   width: 100%;
 `;
+
 
 export const Title = styled.h1`
   font-size: 4rem;
@@ -135,4 +129,18 @@ export const ArtistBio = styled.p`
   font-size: 1rem;
   color: #bbb;
   margin-top: 8px;
+`;
+
+export const HeroSection = styled.section`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 `;

@@ -2,24 +2,8 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { CarouselContainer, ArtistCard, ArtistImage, ArtistName, ArtistBio } from './ArtistCarousel.styles';
+import artists from './artists';
 
-const artists = [
-  {
-    name: 'Drako',
-    img: '/artists/drako.jpg',
-    bio: 'Old school com personalidade marcante.',
-  },
-  {
-    name: 'Luna',
-    img: '/artists/luna.jpg',
-    bio: 'Traços delicados e sombreados perfeitos.',
-  },
-  {
-    name: 'Rafa Ink',
-    img: '/artists/rafa.jpg',
-    bio: 'Especialista em blackwork e geométricos.',
-  },
-];
 
 export default function ArtistCarousel() {
   const settings = {

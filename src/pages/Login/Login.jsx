@@ -15,7 +15,7 @@ export default function Login() {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:3333/api/auth/login', {  // Ajusta a URL da tua API
+      const res = await fetch('http://localhost:3333/api/auth/login', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -27,11 +27,11 @@ export default function Login() {
       }
 
       const data = await res.json();
-      // Salva o token ou user info no localStorage/sessionStorage conforme tua lógica
+      // Salva o token ou user info no localStorage/sessionStorage 
       localStorage.setItem('token', data.token);
 
-      // Redireciona pra página principal (exemplo)
-      navigate('/dashboard');
+      // Redireciona pra página principal
+      navigate('/home');
     } catch (err) {
       setError(err.message);
     }

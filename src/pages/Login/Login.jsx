@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Title, Input, Button, ErrorMessage, RegisterLink, GoogleButton } from './Login.styles';
 import { useNavigate } from 'react-router-dom';
-import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -9,7 +9,6 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Função que chama o backend para login normal
   async function handleLogin(e) {
     e.preventDefault();
     setError('');
@@ -27,17 +26,13 @@ export default function Login() {
       }
 
       const data = await res.json();
-      // Salva o token ou user info no localStorage/sessionStorage 
       localStorage.setItem('token', data.token);
-
-      // Redireciona pra página principal
-      navigate('/home');
+      navigate('/bookings');  // mudar pra /bookings aqui
     } catch (err) {
       setError(err.message);
     }
   }
 
-  // Função que recebe o token do Google (backend precisa aceitar isso)
   async function handleGoogleLoginSuccess(credentialResponse) {
     setError('');
     try {
@@ -54,7 +49,7 @@ export default function Login() {
 
       const data = await res.json();
       localStorage.setItem('token', data.token);
-      navigate('/home');
+      navigate('/bookings');  // mudar pra /bookings aqui também
     } catch (err) {
       setError(err.message);
     }
@@ -68,9 +63,7 @@ export default function Login() {
     <Container>
       <Form onSubmit={handleLogin}>
         <Title>Login</Title>
-
         {error && <ErrorMessage>{error}</ErrorMessage>}
-
         <Input
           type="email"
           placeholder="Email"
@@ -78,7 +71,6 @@ export default function Login() {
           onChange={e => setEmail(e.target.value)}
           required
         />
-
         <Input
           type="password"
           placeholder="Senha"
@@ -86,7 +78,6 @@ export default function Login() {
           onChange={e => setPassword(e.target.value)}
           required
         />
-
         <Button type="submit">Entrar</Button>
 
         <GoogleButton>

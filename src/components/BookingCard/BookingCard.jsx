@@ -1,41 +1,44 @@
 import React from 'react';
 import {
   Card,
-  Info,
+  CardInfo,
   Label,
-  Value
+  Value,
 } from './BookingCard.styles';
-import { motion } from 'framer-motion';
 
 export default function BookingCard({ booking }) {
+  const date = new Date(booking.date);
+  const formattedDate = date.toLocaleDateString('pt-BR', {
+    weekday: 'long',
+    day: '2-digit',
+    month: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <Card>
-        <Info>
-          <Label>Cliente:</Label>
-          <Value>{booking.client?.name || 'N/A'}</Value>
-        </Info>
-        <Info>
-          <Label>Profissional:</Label>
-          <Value>{booking.professional?.name || 'N/A'}</Value>
-        </Info>
-        <Info>
-          <Label>Serviço:</Label>
-          <Value>{booking.service}</Value>
-        </Info>
-        <Info>
-          <Label>Data:</Label>
-          <Value>{new Date(booking.date).toLocaleDateString()}</Value>
-        </Info>
-        <Info>
-          <Label>Hora:</Label>
-          <Value>{booking.hour}</Value>
-        </Info>
-      </Card>
-    </motion.div>
+    <Card>
+      <CardInfo>
+        <Label>Serviço:</Label>
+        <Value>{booking.serviceType}</Value>
+      </CardInfo>
+
+      <CardInfo>
+        <Label>Data:</Label>
+        <Value>{formattedDate}</Value>
+      </CardInfo>
+
+      <CardInfo>
+        <Label>Profissional:</Label>
+        <Value>{booking.professionalId}</Value>
+      </CardInfo>
+
+      {booking.note && (
+        <CardInfo>
+          <Label>Observações:</Label>
+          <Value>{booking.note}</Value>
+        </CardInfo>
+      )}
+    </Card>
   );
 }

@@ -5,7 +5,7 @@ import {
   BookingsList,
   Loading,
   ErrorMessage,
-  EmptyState
+  EmptyState,
 } from './Bookings.styles';
 import BookingCard from '../../components/BookingCard/BookingCard';
 
@@ -17,24 +17,34 @@ export default function Bookings() {
   useEffect(() => {
     async function fetchBookings() {
       const token = localStorage.getItem('token');
-      if (!token) return setError('Usuário não autenticado');
+      if (!token) {
+        setError('Usuário não autenticado');
+        setLoading(false);
+        return;
+      }
 
       try {
-        const res = await fetch('http://localhost:3333/api/bookings', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const now = new Date();
+        const isoNow = new Date(
+          now.getTime() - now.getTimezoneOffset() * 60000
+        ).toISOString();
 
-        if (!res.ok) {
-          const data = await res.json();
-          throw new Error(data.message || 'Erro ao buscar agendamentos');
-        }
+        const res = await fetch(
+          `http://localhost:3333/api/bookings?start=${isoNow}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await res.json();
+        console.log('API retornou:', data)
+        if (!res.ok) throw new Error(data.message || 'Erro ao buscar agendamentos');
+
         setBookings(data);
       } catch (err) {
-        setError(err.message);
+        setError(err.message || 'Erro ao buscar dados');
       } finally {
         setLoading(false);
       }
@@ -51,12 +61,12 @@ export default function Bookings() {
       {error && <ErrorMessage>{error}</ErrorMessage>}
 
       {!loading && !error && bookings.length === 0 && (
-        <EmptyState>Você ainda não tem agendamentos.</EmptyState>
+        <EmptyState>Você ainda não tem agendamentos futuros.</EmptyState>
       )}
 
       <BookingsList>
         {bookings.map((booking) => (
-          <BookingCard key={booking._id} booking={booking} />
+          <BookingCard key={booking.id} booking={booking} />
         ))}
       </BookingsList>
     </Container>

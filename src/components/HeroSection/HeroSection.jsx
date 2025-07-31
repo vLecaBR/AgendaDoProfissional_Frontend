@@ -18,7 +18,7 @@ export default function HeroSection() {
       </Subtitle>
       <CTAButton
         as={motion.a}
-        href="/agendamentos"
+        href="/bookings"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.3 }}

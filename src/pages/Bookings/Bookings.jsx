@@ -63,7 +63,7 @@ export default function Bookings() {
       {!loading && !error && bookings.length === 0 && (
         <EmptyState>Você ainda não tem agendamentos futuros.</EmptyState>
       )}
-
+      
       <BookingsList>
         {bookings.map((booking) => (
           <BookingCard key={booking.id} booking={booking} />

@@ -24,24 +24,16 @@ export default function Bookings() {
       }
 
       try {
-        const now = new Date();
-        const isoNow = new Date(
-          now.getTime() - now.getTimezoneOffset() * 60000
-        ).toISOString();
-
-        const res = await fetch(
-          `http://localhost:3333/api/bookings?start=${isoNow}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await fetch('http://localhost:3333/api/bookings/me/bookings', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const data = await res.json();
-        console.log('API retornou:', data)
-        if (!res.ok) throw new Error(data.message || 'Erro ao buscar agendamentos');
+        console.log('API retornou:', data);
 
+        if (!res.ok) throw new Error(data.message || 'Erro ao buscar agendamentos');
         setBookings(data);
       } catch (err) {
         setError(err.message || 'Erro ao buscar dados');
@@ -61,8 +53,9 @@ export default function Bookings() {
       {error && <ErrorMessage>{error}</ErrorMessage>}
 
       {!loading && !error && bookings.length === 0 && (
-        <EmptyState>Você ainda não tem agendamentos futuros.</EmptyState>
+        <EmptyState>Você ainda não tem agendamentos.</EmptyState>
       )}
+
       <BookingsList>
         {bookings.map((booking) => (
           <BookingCard key={booking.id} booking={booking} />
